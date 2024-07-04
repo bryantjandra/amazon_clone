@@ -51,6 +51,32 @@ export function getProduct(productId) {
   });
   return matchingProduct;
 }
+/*
+function logThis() {
+  console.log(this); //Inside a function, this = undefined.
+}
+
+logThis();
+
+const object3 = {
+  method: () => {
+    console.log(this); //arrow functions do not change the value of "this". Thus, in here it will still be undefined. 
+  }
+}
+
+const object4 = {
+  method: function() {
+    console.log(this); //Inside a method, 'this' points to the outer object!
+  }
+}
+
+object3.method();
+object4.method();
+
+*/
+
+
+
 
 export const products = [
   {
