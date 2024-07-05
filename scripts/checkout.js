@@ -12,16 +12,22 @@ loadProducts(() => {
 })
  */
 //NOTE: Can only use await when we are inside an async function. 
-async function loadPage() { //the keyword async makes a function return a promise.
+async function loadPage() { // async makes a function return a promise.
     console.log('load page');
-    await loadProductsFetch(); // await lets us write asynchronous code like normal code
-
-    //NOTE: Async await can only be used with promises, not with callbacks. 
-    await new Promise((resolve) => {
-        loadCart(() => {
-            resolve(); //run resolve once loadCart is finished.
+    try {
+        await loadProductsFetch(); // await lets us write asynchronous code like normal code
+        
+        //NOTE: Async await can only be used with promises, not with callbacks. 
+        await new Promise((resolve, reject) => { //reject is a function, and it helps us create an error in the future. 
+            // throw 'error2';
+            loadCart(() => {
+                //reject('error3');
+                resolve(); //run resolve once loadCart is finished.
+            });
         });
-    });
+    } catch(error) {
+        console.log("Unexpected Error!")
+    }
     renderOrderSummary();
     renderPaymentSummary();
 }

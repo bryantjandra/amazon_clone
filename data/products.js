@@ -94,6 +94,7 @@ export function loadProductsFetch() {
 }
 
 
+
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
@@ -107,6 +108,7 @@ export function loadProducts(fun) {
     console.log('load products');
     fun();
   });
+  
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
