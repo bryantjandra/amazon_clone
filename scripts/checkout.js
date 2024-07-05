@@ -11,10 +11,29 @@ loadProducts(() => {
     renderPaymentSummary();
 })
  */
+//NOTE: Can only use await when we are inside an async function. 
+async function loadPage() { //the keyword async makes a function return a promise.
+    console.log('load page');
+    await loadProductsFetch(); // await lets us write asynchronous code like normal code
+
+    //NOTE: Async await can only be used with promises, not with callbacks. 
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve(); //run resolve once loadCart is finished.
+        });
+    });
+    renderOrderSummary();
+    renderPaymentSummary();
+}
+loadPage();
+
+
+
+/*
 
 //NOTE: Run multiple promises at the SAME TIME using Promise.all(), it will wait for all of the promises to finish. 
 Promise.all([
-    loadProductsFetch, //returns a promise here
+    loadProductsFetch(), //returns a promise here
     new Promise((resolve) => {
         loadCart(() => {
             resolve(); //run resolve once loadCart is finished.
@@ -25,3 +44,5 @@ Promise.all([
         renderOrderSummary();
         renderPaymentSummary();
 })
+
+*/
